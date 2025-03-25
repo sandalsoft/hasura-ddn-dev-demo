@@ -12,3 +12,7 @@ This shows interacting with a Hasura DDN-powered API from the developer's perspe
 
 - `uv add requests`
 - `uv run get_customer_dashboard.py`
+
+### Schema
+
+JSON:API Swagger docs can be found at: https://telco-jsonapi.hasura-demo.com/
