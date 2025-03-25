@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "721d17a9-1932-46b0-a547-0fac627b2ff1",
-		"name": "Hasura DDN Telco Demo",
+		"name": "Hasura DDN Demo (Telco Data Model)",
 		"description": "Multiple pre-configured queries that show the API consumer perspective of interacting with Hasura DDN",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43466532",
@@ -45,7 +45,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query CustomerDashboardAll {\n  customers(\n    limit: 10\n  ) {\n    customerId\n    firstName\n    creditCards {\n      expiry\n      maskCreditCard\n      number\n      customerId\n      createdAt\n      updatedAt\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
+						"query": "query CustomerDashboardAll {\n  customers(\n    limit: 10\n    offset: 10\n  ) {\n    customerId\n    firstName\n    creditCards {\n      expiry\n      maskCreditCard\n      number\n      customerId\n      createdAt\n      updatedAt\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
 						"variables": ""
 					}
 				},
@@ -273,23 +273,27 @@
 		{
 			"name": "GQL Customers w/relationships",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomersWRelationships {\n  customers(limit: 1, offset: 0) {\n    customerId\n    customerPlans {\n      planId\n      plan {\n        description\n        monthlyFee\n        planId\n        planName\n        sfRecord\n        type\n      }\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
 				"url": {
-					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users",
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
 					"protocol": "https",
 					"host": [
-						"telco",
+						"telco-0fda1a9112",
 						"axiom-hasura",
 						"private-ddn",
 						"hasura",
 						"app"
 					],
 					"path": [
-						"v1",
-						"rest",
-						"auth",
-						"Users"
+						"graphql"
 					]
 				}
 			},
@@ -301,7 +305,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users",
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/customer/Customers?page%5Blimit%5D=1&page%5Boffset%5D=0&include=customerPlans%2CcustomerPlans.plan&fields%5BCustomers%5D=customerId",
 					"protocol": "https",
 					"host": [
 						"telco",
@@ -313,8 +317,26 @@
 					"path": [
 						"v1",
 						"rest",
-						"auth",
-						"Users"
+						"customer",
+						"Customers"
+					],
+					"query": [
+						{
+							"key": "page%5Blimit%5D",
+							"value": "1"
+						},
+						{
+							"key": "page%5Boffset%5D",
+							"value": "0"
+						},
+						{
+							"key": "include",
+							"value": "customerPlans%2CcustomerPlans.plan"
+						},
+						{
+							"key": "fields%5BCustomers%5D",
+							"value": "customerId"
+						}
 					]
 				}
 			},
