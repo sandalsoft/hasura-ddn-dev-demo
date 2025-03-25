@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "721d17a9-1932-46b0-a547-0fac627b2ff1",
+		"name": "Hasura DDN Telco Demo",
+		"description": "Multiple pre-configured queries that show the API consumer perspective of interacting with Hasura DDN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43466532",
+		"_collection_link": "https://ericnelson-3540017.postman.co/workspace/94ed8e04-cbb8-407c-8e93-31b57a75ca2b/collection/43466532-721d17a9-1932-46b0-a547-0fac627b2ff1?action=share&source=collection_link&creator=43466532"
+	},
+	"item": [
+		{
+			"name": "Customer Dash {customerId: 1}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerDashboard {\n  customers(\n    where: {customerId: {_eq: \"1\"}}\n    limit: 10\n  ) {\n    customerId\n    firstName\n    creditCards {\n      expiry\n      maskCreditCard\n      number\n      customerId\n      createdAt\n      updatedAt\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Dash (limit=10, offset=0)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerDashboardAll {\n  customers(\n    limit: 10\n  ) {\n    customerId\n    firstName\n    creditCards {\n      expiry\n      maskCreditCard\n      number\n      customerId\n      createdAt\n      updatedAt\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[JWT] Customer Dash",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJob2xvdGVsLW5leHQtYXV0aCIsImNsYWltcy5qd3QuaGFzdXJhLmlvIjp7IngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsiY3VzdG9tZXIiXSwieC1oYXN1cmEtZGVmYXVsdC1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjo3fSwiaWF0IjoxNzQyODQ5NzQxLCJleHAiOjE3NzQ0MDczNDF9.nZdpUbMh947i-ypCeJEYep8aa5M4xUPuyJ0HYrfyr0E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerDashboardAll {\n  customers(\n    limit: 10\n  ) {\n    customerId\n    firstName\n    creditCards {\n      expiry\n      maskCreditCard\n      number\n      customerId\n      createdAt\n      updatedAt\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-5d69ec9a1f.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-5d69ec9a1f",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Dash {$var}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerVars($firstName: Customer_Varchar!) {\n  customers(where: {firstName: {_eq: $firstName}}) {\n    firstName\n    lastName\n    email\n    creditCards {\n      expiry\n    }\n    customerPlans {\n      cellNumber\n      customerPlanId\n      startDate\n      endDate\n      plan {\n        description\n      }\n      customerPlanDevices {\n        device {\n          brand\n          model\n          updatedAt\n        }\n        customerPlanId\n      }\n    }\n    customerLinks {\n      customerPreferences {\n        behavioralData {\n          lastAppLogin\n          lastWebsiteVisit\n        }\n      }\n    }\n  }\n}",
+						"variables": "{\n    \"firstName\": \"Mike\"\n  }"
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AuthZ Example 1 (admin)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerAuthZExample1 {\n  customers {\n    customerId\n    firstName\n    lastName\n    email\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AuthZ Example 1 (customer)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJob2xvdGVsLW5leHQtYXV0aCIsImNsYWltcy5qd3QuaGFzdXJhLmlvIjp7IngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsiY3VzdG9tZXIiXSwieC1oYXN1cmEtZGVmYXVsdC1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjo3fSwiaWF0IjoxNzQyODQ5NzQxLCJleHAiOjE3NzQ0MDczNDF9.nZdpUbMh947i-ypCeJEYep8aa5M4xUPuyJ0HYrfyr0E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerAuthZExample1 {\n  customers {\n    customerId\n    firstName\n    lastName\n    email\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-5d69ec9a1f.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-5d69ec9a1f",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AuthZ Example 2 (admin)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerAuthZExample2 {\n  network {\n    capacity\n    nodeName\n    status\n    latitude\n    longitude\n    nodeId\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AuthZ Example 2 (customer)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJob2xvdGVsLW5leHQtYXV0aCIsImNsYWltcy5qd3QuaGFzdXJhLmlvIjp7IngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsiY3VzdG9tZXIiXSwieC1oYXN1cmEtZGVmYXVsdC1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS1yb2xlIjoiY3VzdG9tZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjo3fSwiaWF0IjoxNzQyODQ5NzQxLCJleHAiOjE3NzQ0MDczNDF9.nZdpUbMh947i-ypCeJEYep8aa5M4xUPuyJ0HYrfyr0E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CustomerAuthZExample2 {\n  network {\n    capacity\n    nodeName\n    status\n    latitude\n    longitude\n    nodeId\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-5d69ec9a1f.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-5d69ec9a1f",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GQL Customers w/relationships",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"auth",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON:API /Customers w/relationships",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"auth",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON:API /Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"auth",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON:API /Users[options]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/auth/Users?page%5Blimit%5D=10&page%5Boffset%5D=0&fields%5BUsers%5D=email%2Cid",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"auth",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "page%5Blimit%5D",
+							"value": "10"
+						},
+						{
+							"key": "page%5Boffset%5D",
+							"value": "0"
+						},
+						{
+							"key": "fields%5BUsers%5D",
+							"value": "email%2Cid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GQL CreditCards",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CreditCardsW_Customer {\n  creditCards {\n    createdAt\n    creditCardId\n    customerId\n    cvv\n    expiry\n    maskCreditCard\n    number\n    updatedAt\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GQL CreditCards w/ Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query CreditCardsW_Customer {\n  creditCards {\n    createdAt\n    creditCardId\n    customerId\n    cvv\n    expiry\n    maskCreditCard\n    number\n    updatedAt\n    customer {\n      address\n      city\n      country\n      customerId\n      email\n      firstName\n      image\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://telco-0fda1a9112.axiom-hasura.private-ddn.hasura.app/graphql",
+					"protocol": "https",
+					"host": [
+						"telco-0fda1a9112",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON:API /CreditCards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/customer/CreditCards?page%5Blimit%5D=5&include=customer&fields%5BCreditCards%5D=createdAt%2CcreditCardId%2CcustomerId%2Ccvv%2Cexpiry%2Cnumber%2CupdatedAt",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"customer",
+						"CreditCards"
+					],
+					"query": [
+						{
+							"key": "page%5Blimit%5D",
+							"value": "5"
+						},
+						{
+							"key": "include",
+							"value": "customer"
+						},
+						{
+							"key": "fields%5BCreditCards%5D",
+							"value": "createdAt%2CcreditCardId%2CcustomerId%2Ccvv%2Cexpiry%2Cnumber%2CupdatedAt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON:API /CreditCards w/ Customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://telco.axiom-hasura.private-ddn.hasura.app/v1/rest/customer/CreditCards?page%5Blimit%5D=5&include=customer&fields%5BCreditCards%5D=createdAt%2CcreditCardId%2CcustomerId%2Ccvv%2Cexpiry%2Cnumber%2CupdatedAt",
+					"protocol": "https",
+					"host": [
+						"telco",
+						"axiom-hasura",
+						"private-ddn",
+						"hasura",
+						"app"
+					],
+					"path": [
+						"v1",
+						"rest",
+						"customer",
+						"CreditCards"
+					],
+					"query": [
+						{
+							"key": "page%5Blimit%5D",
+							"value": "5"
+						},
+						{
+							"key": "include",
+							"value": "customer"
+						},
+						{
+							"key": "fields%5BCreditCards%5D",
+							"value": "createdAt%2CcreditCardId%2CcustomerId%2Ccvv%2Cexpiry%2Cnumber%2CupdatedAt"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
